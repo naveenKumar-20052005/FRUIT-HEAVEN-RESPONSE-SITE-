@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #00b350;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .back-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .cart-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .cart-icon {
+            width: 32px;
+            height: 32px;
+            margin-right: 8px;
+        }
+        #cart-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #f90;
+            color: #fff;
+            font-size: 14px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .cart-items {
+            width: 100%;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .cart-items > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .cart-items > div:last-child {
+            border-bottom: none;
+        }
+        .cart-items button {
+            background-color: #110050;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+        .cart-items button:hover {
+            background-color: #c6436e;
+        }
+        .total-price {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        #total-price {
+            font-weight: bold;
+        }
+        #place-order-btn {
+            background-color: #fb641b;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+        #place-order-btn:hover {
+            background-color: #f55500;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.3s;
+        }
+        @keyframes modalFadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        .close-btn {
+            background-color: #110050;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .close-btn:hover {
+            background-color: #c6436e;
+        }
+    </style>
+    <link rel="icon" type="Image/png" href="./images/logo/New folder/1718368720830.png">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-link">Back</a>
+        <div class="cart-container" onclick="toggleCart()">
+            <i class="cart-icon"><img src="./images/icon/cart-shopping-solid.svg" alt="Cart Icon"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </header>
+    <main>
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items will be generated here -->
+        </div>
+        <div class="total-price">Total Price: <span id="total-price">$0.00</span></div>
+        <button id="place-order-btn" onclick="placeOrder()">Place Order</button>
+    </main>
+
+    <!-- Modal Popup -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <h2>Order placed successfully!</h2>
+            <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+    
+    <script>
+        // JavaScript for cart functionality
+        let cart = [];
+
+        // Function to display cart items
+        function displayCartItems() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = cart.map((p, index) => `
+                <div>
+                    <span>${p.name}: $${p.price.toFixed(2)}</span>
+                    <button onclick="removeItem(${index})">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        // Function to calculate total price
+        function calculateTotalPrice() {
+            const totalPrice = cart.reduce((acc, curr) => acc + curr.price, 0);
+            document.getElementById('total-price').textContent = `$${totalPrice.toFixed(2)}`;
+        }
+
+        // Function to remove item from cart
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        // Function to place order
+        function placeOrder() {
+            if (cart.length > 0) {
+                document.getElementById('orderModal').style.display = 'flex';
+                cart = [];
+                localStorage.removeItem('cart');
+                updateCart();
+            } else {
+                alert('Your cart is empty.');
+            }
+        }
+
+        // Function to close modal
+        function closeModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        // Function to update cart display
+        function updateCart() {
+            displayCartItems();
+            calculateTotalPrice();
+            document.getElementById('cart-count').textContent = cart.length;
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // Load cart from localStorage on page load
+        window.onload = function() {
+            const storedCart = JSON.parse(localStorage.getItem('cart'));
+            if (storedCart) {
+                cart = storedCart;
+                updateCart();
+            }
+        };
+
+        // Function to toggle cart visibility (optional)
+        function toggleCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.classList.toggle('show-cart');
+        }
+    </script>
+</body>
+</html>

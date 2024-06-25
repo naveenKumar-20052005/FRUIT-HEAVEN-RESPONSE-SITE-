@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Heaven</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media query.css">
+    <link rel="icon" type="Image/png" href="./images/logo/New folder/1718278262670.png">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div class="nav-container">
+        <div class="first-nav">
+            <div class="logo">
+                <img src="./images/logo/New folder/1718278262670.png" alt="logo">
+                <h1> <b> <span>F</span>ruit</b> Heaven</h1>
+            </div>
+
+        </div>
+        <div class="nav-links">
+            <ul id="nav-menu" class="showmenu">
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#About">About Us</a></li>
+                <div class="dropdown">
+                    <button class="dropbtn">&nbsp;Services&nbsp;&#11206;</button>
+                    <div class="drop-content">
+                        <a href="#Product">Product</a>
+                        <a href="#Customer">Customer Review</a>
+                        <a href="#Features">Our Features</a>
+                        <a href="#map">Maps</a>
+                    </div>
+                </div>
+                <li><a href="#Contact">Contact Us</a></li>
+                <li class="hide"><a onclick="toggleMenu()">My Account</a></li>
+                <div id="ico" class="icon" onclick="toggleMenu()"><img src="./images/icon/user-solid.svg" alt=""></div>
+                <div class="menu" id="menu">
+                    <a href="#" onclick="openForm('loginForm')">Login</a>
+                    <a href="#" onclick="openForm('createForm')">Create Account</a>
+                </div>
+
+                <div class="form-container" id="loginForm">
+                    <form id="login" onsubmit="return validateLogin()">
+                        <h2>Login</h2>
+                        <label for="loginEmail">Email:</label>
+                        <input type="email" id="loginEmail" required>
+                        <div class="error" id="loginEmailError"></div>
+                        <label for="loginPassword">Password:</label>
+                        <input type="password" id="loginPassword" required>
+                        <div class="error" id="loginPasswordError"></div>
+                        <button type="submit">Login</button>
+                        <button type="button" onclick="closeForm('loginForm')">Close</button>
+                    </form>
+                </div>
+
+                <div class="form-container" id="createForm">
+                    <form id="create" onsubmit="return validateCreate()">
+                        <h2>Create Account</h2>
+                        <label for="createEmail">Email:</label>
+                        <input type="email" id="createEmail" required>
+                        <div class="error" id="createEmailError"></div>
+                        <label for="createPassword">Password:</label>
+                        <input type="password" id="createPassword" required>
+                        <div class="error" id="createPasswordError"></div>
+                        <label for="confirmPassword">Confirm Password:</label>
+                        <input type="password" id="confirmPassword" required>
+                        <div class="error" id="confirmPasswordError"></div>
+                        <button type="submit">Create Account</button>
+                        <button type="button" onclick="closeForm('createForm')">Close</button>
+                    </form>
+                </div>
+            </ul>
+            <div class="search-container">
+                <i class="search-icon" onclick="toggleSearchBar()"><img src="./images/icon/magnifying-glass-solid.svg"
+                        alt=""></i>
+                <input type="text" id="search-bar" placeholder="Search" oninput="showSuggestions()"
+                    onkeypress="handleSearch(event)">
+                <ul id="suggestions-list"></ul>
+            </div>
+            <a href="cart.html" class="cart-link">
+                <div class="cart-container">
+                    <i class="cart-icon"><img src="./images/icon/cart-shopping-solid.svg" alt=""></i>
+                    <span id="cart-count">0</span>
+                </div>
+            </a>
+
+
+            <div id="menu-toggle" class="menu1">
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <section id="Home">
+        <div class="background">
+            <img src="./images/background/1718001478193.png" alt="background image" loading="lazy">
+            <div class="image-insidetext">
+                <h1>Welcome <br>To <br> <span>Fruit Heaven</span></h1>
+                <h2> "Freshness <span>Elevated</span> Flavor<span> Perfected"</span></h2>
+                <button> <a href="#Features">Read More</a></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="Product">
+        <div id="product-container">
+            <div class="product-Name">
+                <h1><span>Pro</span>ducts</h1>
+            </div>
+            <div class="all-products">
+
+                <div id="pineapple" class="card-container">
+                    <div class="card">
+                        <div class="card-badge">New</div>
+                        <img src="./images/fruits/1718006782104.jpg" alt="Product Image" class="card-image"
+                            loading="lazy">
+                        <div class="card-content">
+                            <div class="card-title">Pineapple</div>
+                            <div class="card-price">
+                                <span class="price-new">$15.00</span>
+                                <span class="price-old">$29.00</span>
+                            </div>
+                            <div class="card-buttons">
+                                <button class="btn view-detail">View detail</button>
+                                <button class="btn add-to-cart" onclick="addToCart('Pineapple',15.00)">Add to
+                                    cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="watermelon" class="card-container">
+                    <div class="card">
+                        <div class="card-badge">New</div>
+                        <img src="./images/fruits/1718006782108.jpg" alt="Product Image" class="card-image"
+                            loading="lazy">
+                        <div class="card-content">
+                            <div class="card-title">Watermelon</div>
+                            <div class="card-price">
+                                <span class="price-new">$9.00</span>
+                                <span class="price-old">$19.00</span>
+                            </div>
+                            <div class="card-buttons">
+                                <button class="btn view-detail">View detail</button>
+                                <button onclick="addToCart('Watermelon',9.00)" class="btn add-to-cart">Add to
+                                    cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div id="orange" class="card-container">
+                    <div class="card">
+                        <div class="card-badge">New</div>
+                        <img src="./images/fruits/1718006782111.jpg" alt="Product Image" class="card-image"
+                            loading="lazy">
+                        <div class="card-content">
+                            <div class="card-title">Orange</div>
+                            <div class="card-price">
+                                <span class="price-new">$29.00</span>
+                                <span class="price-old">$39.00</span>
+                            </div>
+                            <div class="card-buttons">
+                                <button class="btn view-detail">View detail</button>
+                                <button onclick="addToCart('Orange',29.00)" class="btn add-to-cart">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="apple" class="card-container">
+                    <div class="card">
+                        <div class="card-badge">New</div>
+                        <img src="./images/fruits/1718006782114.jpg" alt="Product Image" class="card-image"
+                            loading="lazy">
+                        <div class="card-content">
+                            <div class="card-title">Apple</div>
+                            <div class="card-price">
+                                <span class="price-new">$39.00</span>
+                                <span class="price-old">$49.00</span>
+                            </div>
+                            <div class="card-buttons">
+                                <button class="btn view-detail">View detail</button>
+                                <button onclick="addToCart('Apple',39.00)" class="btn add-to-cart">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="strawberry" class="card-container">
+                    <div class="card">
+                        <div class="card-badge">Special Offer</div>
+                        <img src="./images/fruits/1718006782118.jpg" alt="Product Image" class="card-image"
+                            loading="lazy">
+                        <div class="card-content">
+                            <div class="card-title">Strawberry</div>
+                            <div class="card-price">
+                                <span class="price-new">$49.00</span>
+                                <span class="price-old">$69.00</span>
+                            </div>
+                            <div class="card-buttons">
+                                <button class="btn view-detail">View detail</button>
+                                <button onclick="addToCart('Strawberry',49.00)" class="btn add-to-cart">Add to
+                                    cart</button loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="grap" class="card-container">
+                    <div class="card">
+                        <div class="card-badge">Fresh</div>
+                        <img src="./images/fruits/1718006782123.jpg" alt="Product Image" class="card-image"
+                            loading="lazy">
+                        <div class="card-content">
+                            <div class="card-title">Green Graps</div>
+                            <div class="card-price">
+                                <span class="price-new">$12.00</span>
+                                <span class="price-old">$19.00</span>
+                            </div>
+                            <div class="card-buttons">
+                                <button class="btn view-detail">View detail</button>
+                                <button onclick="addToCart('Green Graps',12.00)" class="btn add-to-cart">Add to
+                                    cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="grapes" class="card-container">
+                    <div class="card">
+                        <div class="card-badge">New</div>
+                        <img src="./images/fruits/1718006782127.jpg" alt="Product Image" class="card-image"
+                            loading="lazy">
+                        <div class="card-content">
+                            <div class="card-title">Grapes</div>
+                            <div class="card-price">
+                                <span class="price-new">$14.00</span>
+                                <span class="price-old">$29.00</span>
+                            </div>
+                            <div class="card-buttons">
+                                <button class="btn view-detail">View detail</button>
+                                <button onclick="addToCart('Grapes',14.00)" class="btn add-to-cart">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="banana" class="card-container">
+                    <div class="card">
+                        <div class="card-badge">New</div>
+                        <img src="./images/fruits/1718006782131.jpg" alt="Product Image" class="card-image"
+                            loading="lazy">
+                        <div class="card-content">
+                            <div class="card-title">Banana</div>
+                            <div class="card-price">
+                                <span class="price-new">$20.00</span>
+                                <span class="price-old">$29.00</span>
+                            </div>
+                            <div class="card-buttons">
+                                <button class="btn view-detail">View detail</button>
+                                <button onclick="addToCart('Banana',20.00)" class="btn add-to-cart">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="About">
+        <div class="about-name">
+            <h1>About Us</h1>
+            <h2>Fruit Heavan</h2>
+        </div>
+
+        <div class="about-us">
+            <div>
+                <img src="./images/about us/about.jfif" alt="about us" loading="lazy">
+            </div>
+            <div class="para">
+                <p> &nbsp;&nbsp;&nbsp; Welcome to Fruit Heaven, where we've been serving premium fruits and
+                    exceptional
+                    service for over two decades. For the past 20 years, Fruit Heaven has been a beacon of quality
+                    and
+                    reliability in the fruit industry, delighting customers with the freshest produce and unparalleled
+                    service. <br> &nbsp;&nbsp;&nbsp; Our journey began two decades ago with a simple yet powerful
+                    vision: to create a
+                    haven for fruit lovers, where they could indulge in the finest nature has to offer. Over the years,
+                    we've cultivated relationships with trusted farmers and suppliers worldwide, ensuring that every
+                    fruit that graces our shelves meets the highest standards of excellence. <br>
+                    &nbsp;&nbsp;&nbsp; But our commitment goes beyond just providing top-quality fruits; it's about
+                    building
+                    lasting relationships with our customers. For two decades, we've strived to exceed expectations,
+                    offering personalized service and a shopping experience that's second to none. From our
+                    knowledgeable
+                    staff ready to assist you with your selections to our user-friendly website designed for seamless
+                    browsing, we're here to make your journey to Fruit Heaven as enjoyable as possible. <br>
+                    &nbsp;&nbsp;&nbsp; And as we celebrate our 20th anniversary, we're more dedicated than ever to
+                    upholding
+                    the values that have made Fruit Heaven a trusted name. With our rich history as a foundation, we
+                    look
+                    forward to continuing to serve you for many years to come, bringing the taste of paradise right to
+                    your
+                    doorstep. <br>
+
+                    &nbsp;&nbsp;&nbsp; Join us as we embark on the next chapter of our journey, where the passion for
+                    quality, service, and community remains as strong as ever. Here's to 20 years of Fruit Heaven and
+                    many
+                    more to come.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="Features">
+        <h1 class="fea"> Our Features</h1>
+        <div class="feature">
+            <div class="feature-container">
+                <img src="./images/features icon/1718346489509.png" alt="img" loading="lazy">
+                <div class="feature-condent">
+                    <h3>Orgonic Fruits</h3>
+                    <p> Grown without synthetic chemicals, prioritizing environmental sustainability and natural farming
+                        methods.</p>
+                    <button class="feature-btn">Read More</button>
+                </div>
+            </div>
+            <div class="feature-container">
+                <img src="./images/features icon/1718346489482.png" alt="img" loading="lazy">
+                <div class="feature-condent">
+                    <h3>EcoFarming</h3>
+                    <p>
+                        "Natural, eco-friendly farming methods promoting sustainability and environmental health."</p>
+                    <button class="feature-btn">Read More</button>
+                </div>
+            </div>
+            <div class="feature-container">
+                <img src="./images/features icon/1718346489499.png" alt="img" loading="lazy">
+                <div class="feature-condent">
+                    <h3>Biological Proof</h3>
+                    <p> Research shows higher antioxidant levels in organic fruits, enhancing their nutritional value.
+                    </p>
+                    <button class="feature-btn">Read More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Customer">
+        <div class="customer-title">
+            <h1>CUSTOMER REVIEW</h1>
+            <p>10000+ Satisfying Customer Review</p>
+        </div>
+
+        </div>
+
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <div class="cusrev">
+                        <img src="./images/customer/1718088220105.png" alt="customer pic" loading="lazy">
+
+                    </div>
+                    <div>
+                        <h3>Client name : <span>Emma</span></h3>
+                        <p class="rev">Review</p>
+                        <p class="c-r">"Fruit Heaven is a true gem! Their fresh produce is like a slice of paradise
+                            delivered
+                            straight to your doorstep. From succulent strawberries to juicy mangoes, every bite is
+                            bursting with flavor. I feel nourished and energized with every purchase. Thank you for
+                            bringing a taste of heaven into my life!"</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="cusrev">
+                        <img src="./images/customer/1718088945344.png" alt="customer pic" loading="lazy">
+
+                    </div>
+                    <div>
+                        <h3>Client name : <span>Petter</span></h3>
+                        <p class="rev">Review</p>
+                        <p class="c-r">"Step into a world of flavor at Fruit Heaven! Their bounty of fruits is like a
+                            symphony for
+                            the senses, each piece a vibrant melody of color and taste. With every visit, I am
+                            transported to a realm where freshness reigns supreme, and nature's sweetness dances on my
+                            palate. Fruit Heaven, where every bite is a celestial delight!"</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="cusrev">
+                        <img src="./images/customer/1718089068678.png" alt="customer pic" loading="lazy">
+                    </div>
+                    <div>
+                        <h3>Client name : <span>sophia</span></h3>
+                        <p class="rev">Review</p>
+                        <p class="c-r">" Fruit Heaven is my go-to for quality produce. Their commitment to organic
+                            options ensures
+                            I'm getting the best for my family. The variety is impressive, and the staff is always
+                            knowledgeable and friendly. Whether it's a quick snack or a centerpiece for a special
+                            occasion, Fruit Heaven delivers consistent freshness and flavor every time."</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="cusrev">
+                        <img src="./images/customer/1718089181281.png" loading="lazy" alt="customer pic">
+
+                    </div>
+                    <div>
+                        <h3>Client name : <span>James Peterson</span></h3>
+                        <p class="rev">Review</p>
+                        <p class="c-r">"Who needs a trip to the tropics when you've got Fruit Heaven ? This place is
+                            like a vacation
+                            for your taste buds! Their fruits are so fresh, it's like they were plucked straight from
+                            the Garden of Eden. I swear, one bite of their pineapple and you'll be doing the hula in
+                            your living room. Don't believe me? Try it yourself and taste the paradise!"</p>
+                    </div>
+                </div>
+
+            </div>
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+    </section>
+
+    <section id="Contact">
+        <div class="con-title">
+            <h1>CONTACT US</h1>
+        </div>
+        <div class="contact-us">
+            <div class="form-1">
+                <p>Call US <br><img src="./images/contact us/phone-solid.svg" alt=""> +1234567890</p>
+                <p>Email Us <br><img src="./images/contact us/envelope-solid.svg" alt="">johnwick@gmail.com</p>
+                <p>Shop Address <br><img src="./images/contact us/location-dot-solid.svg" alt=""> 43 Street, Las Vegas,
+                    USA
+                </p>
+                <p>Follows US <br>
+                    <img src="./images/contact us/whatsapp.svg" alt="">
+                    <img src="./images/contact us/facebook.svg" alt="">
+                    <img src="./images/contact us/x-twitter.svg" alt="">
+                    <img src="./images/contact us/youtube.svg" alt="">
+                    <img src="./images/contact us/instagram.svg" alt="">
+                </p>
+            </div>
+            <div class="form2">
+                <form class="fo" action="">
+                    <input type="text" placeholder="Name" required>
+                    <input type="text" placeholder="Email" required>
+                    <input type="text" placeholder="Subject" required>
+                    <textarea name="message" id="msg" placeholder="Message"></textarea>
+                    <button>Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="map">
+        <div class="map-name">
+            <h1>Map</h1>
+        </div>
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.977195244998!2d-122.08385498471799!3d37.422000979825334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085806f3523fb7b%3A0x2c82a3f9ae259e3e!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1623403202109!5m2!1sen!2sus"
+                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <div class="footer">
+        <div class="foter-menu">
+            <div class="f1">
+                <h1><span>Fruit</span> <span class="fff">Heaven</span></h1>
+                <h3>"Taste The Paradise in Every Bite"<br> <br></h3>
+                <p>Contact on Social Media</p>
+
+                <a href="#"><img src="./images/contact us/instagram.svg" alt=""></a>
+                <a href="#"><img src="./images/contact us/whatsapp.svg" alt=""></a>
+                <a href="#"><img src="./images/contact us/x-twitter.svg" alt=""></a>
+                <a href="#"><img src="./images/contact us/youtube.svg" alt=""></a>
+            </div>
+            <div class="f2">
+                <h1>Address</h1>
+                <p><img src="./images/contact us/phone-solid.svg" alt="">+123456789</p>
+                <p><img src="./images/contact us/envelope-solid.svg" alt="">johnwick@gmail.com</p>
+                <p><img src="./images/contact us/location-dot-solid.svg" alt="">43 Street, Las Vegas, USA</p>
+            </div>
+
+            <div class="f3">
+                <h1>Quick Links</h1>
+                <ul class="f3-item">
+                    <li><a href="#Home">&#10095;&nbsp;&nbsp;Home</a></li>
+                    <li><a href="#About">&#10095;&nbsp;&nbsp;About us</a></li>
+                    <li><a href="#Product">&#10095;&nbsp;&nbsp;Our Products</a></li>
+                    <li><a href="#Contact">&#10095;&nbsp;&nbsp;Contact Us</a></li>
+                    <li><a href="#">&#10095;&nbsp;&nbsp;Tearms And Condition</a></li>
+                    <li><a href="#">&#10095;&nbsp;&nbsp;Support</a></li>
+
+                </ul>
+            </div>
+            <div class="f4">
+                <h1>News Letter</h1>
+                <p>Send Any Queries tob Fruit Heaven</p>
+                <div class="f4-btn">
+                    <input type="text" name="Email" placeholder="User Email" required> <button>Sign Up</button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="break">
+        </div>
+        <p class="f-5">Copy Rights &#169; 2024 Reserverd by Fruit Heaven.com , Inc.affiliates <br>Created By Naveen
+        </p>
+    </div>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Back <br> To Top</button>
+    <script src="script.js"></script>
+</body>
+
+</html>
